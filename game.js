@@ -1,10 +1,10 @@
 /* global Phaser */
 
 const config = {
-    type: Phaser,
+    type: Phaser.AUTO,
     width: 256,
     height: 244,
-    backgroundColor: 'white',
+    backgroundColor: '#fff',
     parent: 'game',
     scene: {
         preload, // se ejecuta antes de crear el juego
@@ -13,14 +13,16 @@ const config = {
     }
 }
 
+new Phaser.Game(config);
+
 function preload() {
-    this.load.image('player', 'assets/player.png');
+    console.log('preload');
 }
 
 function create()   {
-    this.add.image(100, 100, 'player');
+    console.log('create');
 }
 
 function update()   {
-    console.log('update');
+
 }
