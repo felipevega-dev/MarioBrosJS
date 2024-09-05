@@ -1,5 +1,7 @@
 /* global Phaser */
 
+import { createAnimations } from "./animations.js";
+
 const config = {
     type: Phaser.AUTO,
     width: 256,
@@ -40,7 +42,7 @@ function preload() {
         'assets/scenery/overworld/floorbricks.png',
         { frameWidth: 32}
     )
-
+    this.load.audio('gameover', 'assets/sound/music/gameover.mp3')
 }
 
 function create()   {
@@ -82,28 +84,13 @@ function create()   {
     
 
     // Animaciones
-    this.anims.create({
-        key: 'mario-walk',
-        frames: this.anims.generateFrameNumbers(
-            'mario', 
-            { start: 1, end: 3}
-        ),
-        frameRate: 12,
-        repeat: - 1,
-    })
-
-    this.anims.create({
-        key: 'mario-jump',
-        frames: [{ key: 'mario', frame: 1}]
-    })
-
-    this.anims.create({
-        key: 'mario-idle',
-        frames:[{ key: 'mario', frame: 0}]
-    })
+    createAnimations(this)
 }
 
 function update()   {
+    if (this.mario.isDead) {
+        return
+    }
     if (this.keys.left.isDown) {
         this.mario.x -= 2
         this.mario.anims.play('mario-walk', true)
@@ -122,5 +109,20 @@ function update()   {
     if (this.keys.up.isDown && this.mario.body.touching.down) {
         this.mario.setVelocityY(-300)
         this.mario.anims.play('mario-jump', true)
+    }
+
+    if (this.mario.y >= config.height) {
+        this.mario.isDead = true
+        this.mario.anims.play('mario-dead')
+        this.mario.setCollideWorldBounds(false)
+        this.sound.add('gameover', { volume: 0.4}).play()
+
+        setTimeout(() => {
+            this.mario.setVelocityY(-350)
+        }, 100)
+
+        setTimeout(() => {
+            this.scene.restart()
+        }, 2000)
     }
 }
