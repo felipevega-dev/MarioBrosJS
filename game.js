@@ -7,11 +7,11 @@ import { initSpritesheet } from './spritesheet.js'
 
 const config = {
   autoFocus: false,
-  type: Phaser.AUTO, // webgl, canvas
-  width: 256,
-  height: 244,
+  type: Phaser.AUTO, 
+  width: 800, 
+  height: 600, 
   backgroundColor: '#049cd8',
-  parent: 'game',
+  parent: 'game', // Este ID se refiere al contenedor 'game' en el HTML
   physics: {
     default: 'arcade',
     arcade: {

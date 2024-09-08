@@ -6,17 +6,13 @@
 }
 html,
 body {
-  zoom: 100%;
-  max-zoom: 100%;
-  min-zoom: 100%;
-  background: rgb(132, 132, 255);
-  margin: 0px;
-  padding: 0px;
-  overflow: hidden;
+  margin: 0;
+  padding: 0;
   height: 100%;
-  width: 100%;
-  color: #f0f0f0;
-  font-family: pixel_nums;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #000; /* Fondo de la página */
 }
 #game {
   margin: 0px;
@@ -28,6 +24,15 @@ body {
   align-items: center;
   justify-content: center;
 }
+
+#game-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
 #gif {
   height: 30%;
   position: absolute;
